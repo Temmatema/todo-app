@@ -1,20 +1,11 @@
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/josefinsans/v25/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQXME.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/josefinsans/v25/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_N_XXME.ttf) format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+@Checkbox-gradient: linear-gradient(140deg, #71b8f7 0%, #9966ff 80%);
+
 html {
   height: 100%;
 }
+
 body {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #181824;
@@ -24,22 +15,24 @@ body {
   margin: 0;
   height: 100%;
 }
+
 input {
   font-family: 'Josefin Sans', sans-serif;
+
+  &::placeholder {
+    font-family: 'Josefin Sans', sans-serif;
+  }
 }
-input::placeholder {
-  font-family: 'Josefin Sans', sans-serif;
-}
+
 button {
   font-family: 'Josefin Sans', sans-serif;
   cursor: pointer;
 }
-h1,
-h2,
-h3,
-p {
+
+h1, h2, h3, p {
   margin: 0;
 }
+
 .todo {
   width: 500px;
   display: flex;
@@ -47,16 +40,20 @@ p {
   margin: 0 auto;
   padding: 70px 0;
 }
+
 .todo__type {
   margin-bottom: 35px;
 }
+
 .todo__type--wrapper {
   display: flex;
   flex-direction: column;
 }
+
 .todo__list {
   box-shadow: 0 0 35px 7px rgba(0, 0, 0, 0.2);
 }
+
 .todo__type--field {
   height: 50px;
   border: none;
@@ -65,10 +62,12 @@ p {
   border-radius: 7px;
   color: white;
   font-size: 20px;
+
+  &:focus {
+    outline: none;
+  }
 }
-.todo__type--field:focus {
-  outline: none;
-}
+
 .todo__type--title {
   text-transform: uppercase;
   color: white;
@@ -76,21 +75,25 @@ p {
   font-size: 40px;
   margin-bottom: 30px;
 }
+
 .item {
   min-height: 50px;
   background-color: #25273c;
   display: flex;
   position: relative;
   border-bottom: 1px rgba(255, 255, 255, 0.1) solid;
+
+  &:first-child {
+    border-radius: 7px 7px 0 0;
+  }
 }
-.item:first-child {
-  border-radius: 7px 7px 0 0;
-}
+
 .item__wrapper {
   display: flex;
   align-items: center;
   padding: 10px 20px;
 }
+
 .item__text {
   color: white;
   font-size: 20px;
@@ -98,17 +101,21 @@ p {
   cursor: pointer;
   transition: all 0.2s;
   overflow-wrap: anywhere ;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
-.item__text:hover {
-  color: rgba(255, 255, 255, 0.5);
-}
+
 .inactive {
   text-decoration: line-through;
   color: rgba(255, 255, 255, 0.1);
 }
+
 input[type='checkbox'] {
   display: none;
 }
+
 .checkmark:after {
   content: '';
   position: absolute;
@@ -122,31 +129,39 @@ input[type='checkbox'] {
   border-radius: 100%;
   background-color: #25273c;
 }
+
 .checkmark:before {
   content: none;
   position: absolute;
   cursor: pointer;
   width: 23px;
   height: 23px;
-  background: linear-gradient(140deg, #71b8f7 0%, #9966ff 80%);
+  background: @Checkbox-gradient;
   top: 0;
   left: 19px;
   bottom: 0;
   margin: auto;
   border-radius: 100%;
 }
-.checkmark:hover:after {
-  outline: transparent;
+
+.checkmark:hover {
+  &:after {
+    outline: transparent;
+  }
+
+  &:before {
+    content: '';
+  }
 }
-.checkmark:hover:before {
-  content: '';
-}
+
 input[type='checkbox']:checked + .checkmark:after {
   background: url("./images/icon-check.svg") no-repeat center;
 }
+
 input[type='checkbox']:checked + .checkmark:before {
   content: '';
 }
+
 .delete {
   position: absolute;
   right: 20px;
@@ -161,24 +176,29 @@ input[type='checkbox']:checked + .checkmark:before {
   background-repeat: no-repeat;
   animation: appear forwards 1s;
 }
+
 .item:hover .delete {
   display: block;
 }
+
 @keyframes appear {
   0% {
     display: none;
     opacity: 0;
   }
+
   100% {
     opacity: 1;
     display: block;
   }
 }
+
 .todo__footer {
   height: 45px;
   background-color: #25273c;
   border-radius: 0 0 7px 7px;
 }
+
 .todo-footer__wrapper {
   display: flex;
   padding: 0 20px;
@@ -186,19 +206,20 @@ input[type='checkbox']:checked + .checkmark:before {
   justify-content: space-between;
   align-items: center;
 }
+
 .todo-footer__count {
   color: rgba(255, 255, 255, 0.3);
 }
+
 .todo-footer__clear,
 .todo-footer__filter-btn {
   height: 30px;
   border: none;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.3);
-  transition: all 0.2s;
+  transition: all .2s;
+
+  &:hover {
+    color: white;
+  }
 }
-.todo-footer__clear:hover,
-.todo-footer__filter-btn:hover {
-  color: white;
-}
-/*# sourceMappingURL=index.css.map */
